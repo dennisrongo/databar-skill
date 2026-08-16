@@ -1,0 +1,57 @@
+name: Publish to ClawHub
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  clawhub:
+    name: Publish skill to ClawHub
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install ClawHub CLI
+        run: npm install -g clawhub
+
+      - name: Authenticate
+        run: clawhub login --token "${{ secrets.CLAWHUB_TOKEN }}" --label "github-actions-${{ github.repository }}"
+
+      - name: Verify release tag matches SKILL.md version
+        if: github.event_name == 'release'
+        run: |
+          SKILL_VERSION="$(awk '/^version:/ {print $2; exit}' SKILL.md)"
+          RELEASE_TAG="${{ github.event.release.tag_name }}"
+          if [ "v$SKILL_VERSION" != "$RELEASE_TAG" ]; then
+            echo "::error::SKILL.md version (v$SKILL_VERSION) does not match release tag ($RELEASE_TAG)"
+            exit 1
+          fi
+          echo "Publishing $RELEASE_TAG"
+
+      - name: Publish to ClawHub
+        run: |
+          clawhub skill publish . \
+            --slug databar-mcp \
+            --name "Databar MCP" \
+            --version "$(awk '/^version:/ {print $2; exit}' SKILL.md)" \
+            --categories "research,automation,knowledge" \
+            --topics "databar,mcp,lead-generation,enrichment,market-research" \
+            --source-repo "${{ github.repository }}" \
+            --source-commit "${{ github.sha }}" \
+            --source-ref "${{ github.ref_name }}" \
+            --changelog "Release ${{ github.event.release.tag_name || github.sha }}"
+
+      - name: Verify publish (fail loudly on auth/scope errors)
+        if: always()
+        run: |
+          clawhub whoami
+          clawhub inspect @dennisrongo/databar-mcp --json | grep -q '"version"' || echo "inspect pending (security scan)"
