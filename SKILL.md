@@ -1,7 +1,7 @@
 ---
 name: databar
 description: "Drive Databar MCP: leads, marketing intel, tables, flows."
-version: 0.2.0
+version: 0.2.1
 author: Dennis Rongo (dennisrongo), Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
