@@ -28,11 +28,13 @@ references/
 
 ```bash
 hermes mcp add databar --url https://mcp.databar.ai/mcp --auth header
-# paste your API key when prompted, then:
+# paste your API key when prompted, then (from ClawHub):
+hermes skills install clawhub/dennisrongo/databar-mcp
+# or straight from this repo:
 hermes skills install https://raw.githubusercontent.com/dennisrongo/databar-skill/main/SKILL.md
 ```
 
-The skill directory (with `references/recipes.md`) installs in one step from the SKILL.md URL. If you'd rather pin a copy: clone the repo into your skills tree.
+The skill directory (with `references/recipes.md`) installs in one step either way. Also listed on [ClawHub](https://clawhub.ai/dennisrongo/databar-mcp) — OpenClaw users: `openclaw skills install @dennisrongo/databar-mcp`. If you'd rather pin a copy: clone the repo into your skills tree.
 
 ### Claude / Cursor / other MCP clients
 
