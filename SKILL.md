@@ -1,7 +1,7 @@
 ---
 name: databar
-description: "Drive Databar MCP: enrichments, waterfalls, tables, flows."
-version: 0.1.0
+description: "Drive Databar MCP: leads, marketing intel, tables, flows."
+version: 0.2.0
 author: Dennis Rongo (dennisrongo), Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -18,7 +18,14 @@ Run Databar data workflows through the `mcp__databar__*` MCP tools: discover and
 
 - Contact enrichment and lead generation: find/verify emails, phone numbers, LinkedIn profiles, decision-makers at companies.
 - Web data pulls: Google Maps, SERP, reviews, job postings, Amazon, YouTube search/comments.
-- Company intelligence: tech stack, firmographics, hiring signals by domain.
+- Company intelligence: tech stack, firmographics, hiring signals, funding/partnership news by domain.
+- Marketing & SEO: competitor keywords (organic + PPC), transactional keywords by topic, LinkedIn ad library, brand social stats.
+- Social & community intelligence: X/Twitter, TikTok, LinkedIn posts, Reddit, Telegram, Hacker News.
+- Job search & recruiting: people search by title/company, hiring-company discovery, Sales Navigator exports.
+- E-commerce & reputation: product details/pricing from any store, Google Shopping, Trustpilot/Capterra/app-store reviews.
+- Investor & market intelligence: funding rounds and investors, public-company financials, earnings transcripts, real-time stock data.
+- App-market intelligence: App Store/Google Play data, revenue estimates, review mining.
+- Web traffic & domain intel: traffic estimates, SEO statistics, global rank, redirects, cheap firmographics by domain.
 - Repeatable pipelines: tables with attached enrichment columns, scheduled sources, flows.
 - Pushing results to HubSpot, Salesforce, Google Sheets, webhooks.
 
@@ -81,7 +88,7 @@ Databar tools are loaded on demand. In Hermes: `tool_search(query="databar <topi
 4. Read back with `get_table_rows` (filters: equals, contains, not_equals, is_empty, is_not_empty — AND-ed; max 500/page).
 5. Export: `search_exporters` → `get_exporter_details` → `add_table_exporter` → `run_table_exporter`.
 
-Recipes for common goals (lead list from domains, local-business scrape, hiring signals, competitor tech stack) are in `references/recipes.md`.
+Recipes for common goals are in `references/` — `recipes.md` (sales/lead-gen core: lead lists, Maps, hiring signals, tech stacks, scheduled sources), `recipes-marketing-social.md` (SEO/PPC, ads, social listening, review mining, price watch, news), `recipes-people-research.md` (decision-makers, warm intros, job search, dossiers, research sourcing), and `recipes-finance-app.md` (funding intel, public-company teardowns, app-market intelligence, domain/traffic teardowns).
 
 ## Cost discipline
 

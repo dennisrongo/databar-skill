@@ -7,9 +7,16 @@ Databar connects 160+ data providers (email finders, verifiers, Google Maps, job
 ## What's inside
 
 ```
-SKILL.md               # Workflow, tool map, cost discipline, pitfalls
-references/recipes.md  # 6 recipes: lead lists, Maps scraping, hiring signals,
-                       # tech stacks, scheduled sources, YouTube/SERP pulls
+SKILL.md                            # Workflow, tool map, cost discipline, pitfalls
+references/
+  recipes.md                        # Sales/lead-gen core: lead lists, Maps,
+                                    # hiring signals, tech stacks, scheduled sources
+  recipes-marketing-social.md       # SEO/PPC teardown, ad intel, social listening,
+                                    # review mining, price watch, news/PR monitoring
+  recipes-people-research.md        # Decision-makers, warm intros, job search,
+                                    # company dossiers, research sourcing
+  recipes-finance-app.md            # Funding rounds, public-company teardowns,
+                                    # app revenue estimates, domain/traffic intel
 ```
 
 ## Requirements
@@ -22,8 +29,10 @@ references/recipes.md  # 6 recipes: lead lists, Maps scraping, hiring signals,
 ```bash
 hermes mcp add databar --url https://mcp.databar.ai/mcp --auth header
 # paste your API key when prompted, then:
-hermes skills install dennisrongo/databar-skill
+hermes skills install https://raw.githubusercontent.com/dennisrongo/databar-skill/main/SKILL.md
 ```
+
+The skill directory (with `references/recipes.md`) installs in one step from the SKILL.md URL. If you'd rather pin a copy: clone the repo into your skills tree.
 
 ### Claude / Cursor / other MCP clients
 
@@ -42,6 +51,10 @@ This is a standard SKILL.md-format skill. Point your client's skill loader at th
 - "Check my Databar balance and find me the cheapest email finder for this list of 50 domains"
 - "Build a table of Sacramento dentists from Google Maps, then find verified emails for the owners"
 - "Which companies hiring data entry clerks also run Zapier? Give me contacts"
+- "What keywords did [competitor] lose rankings for last month, and what are they buying on PPC?"
+- "Pull the last 100 tweets from these 5 AI influencers and cluster what gets engagement"
+- "One-page dossier on [company] before my meeting: stack, news, LinkedIn activity, social stats"
+- "Which companies near me are hiring DevOps engineers? Find the hiring manager's verified email"
 - "How many credits would it cost to enrich these 200 domains with company data?"
 
 ## Disclaimer
