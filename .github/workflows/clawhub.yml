@@ -41,10 +41,15 @@ jobs:
 
       - name: Publish to ClawHub
         run: |
+          VERSION="$(awk '/^version:/ {print $2; exit}' SKILL.md)"
+          if clawhub inspect @dennisrongo/databar-mcp --json 2>/dev/null | grep -q "\"version\": \"$VERSION\""; then
+            echo "Version $VERSION already published — nothing to do."
+            exit 0
+          fi
           clawhub skill publish . \
             --slug databar-mcp \
             --name "Databar MCP" \
-            --version "$(awk '/^version:/ {print $2; exit}' SKILL.md)" \
+            --version "$VERSION" \
             --categories "research,automation,knowledge" \
             --topics "databar,mcp,lead-generation,enrichment,market-research" \
             --source-repo "${{ github.repository }}" \
