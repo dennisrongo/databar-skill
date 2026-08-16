@@ -21,7 +21,10 @@ jobs:
           node-version: '20'
 
       - name: Install ClawHub CLI
-        run: npm install -g clawhub
+        run: |
+          npm install -g clawhub
+          clawhub --cli-version
+          clawhub skill publish --help | grep -E "categories|topics" || echo "NO categories/topics support in this build"
 
       - name: Authenticate
         run: clawhub login --token "${{ secrets.CLAWHUB_TOKEN }}" --label "github-actions-${{ github.repository }}"
